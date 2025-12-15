@@ -1,0 +1,34 @@
+import Nav from "react-bootstrap/Nav"
+import Dropdown from 'react-bootstrap/Dropdown'
+import { Link } from "react-router-dom"
+
+function NavBar() {
+  	return (
+    <>
+		<Nav sticky="top" variant="underline" defaultActiveKey="/">
+			<Nav.Item eventkey={1} href="/">
+				<Nav.Link as={Link}to={'/'}>Home</Nav.Link>
+			</Nav.Item>
+			<Dropdown>
+				<Dropdown.Toggle variant="secondary">
+					Ciphers
+				</Dropdown.Toggle>
+				<Dropdown.Menu>
+        			<Dropdown.Item eventkey={1} href="/caesar_cipher">Caesar</Dropdown.Item>
+      			</Dropdown.Menu>
+			</Dropdown>
+			<Dropdown>
+				<Dropdown.Toggle variant="secondary">
+					Binary
+				</Dropdown.Toggle>
+				<Dropdown.Menu>
+					<Dropdown.Item eventKey={1} href="/binary_conversion">Conversion num</Dropdown.Item>
+        			<Dropdown.Item eventkey={1} href="/binary_translate">Translate char</Dropdown.Item>
+				</Dropdown.Menu>
+			</Dropdown>
+		</Nav>
+	</>
+  	);
+}
+
+export default NavBar;
