@@ -32,8 +32,7 @@ export function charToBinary(char) {
     const aux = char
         .split("")
         .map(c => {
-            const code = c.charCodeAt(0)
-            if (code.toString(2).length < 8) return String(code.toString(2)).padStart(8,0)
+            return String(c.charCodeAt(0).toString(2)).padStart(8,0)
         }).join('')
     return aux
 }

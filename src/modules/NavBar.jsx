@@ -15,6 +15,7 @@ function NavBar() {
 				</Dropdown.Toggle>
 				<Dropdown.Menu>
         			<Dropdown.Item eventkey={1} href="/caesar_cipher">Caesar</Dropdown.Item>
+        			<Dropdown.Item eventkey={1} href="/xor_logic">XOR logic</Dropdown.Item>
       			</Dropdown.Menu>
 			</Dropdown>
 			<Dropdown>
@@ -22,8 +23,8 @@ function NavBar() {
 					Binary
 				</Dropdown.Toggle>
 				<Dropdown.Menu>
-					<Dropdown.Item eventKey={1} href="/binary_conversion">Conversion num</Dropdown.Item>
-        			<Dropdown.Item eventkey={1} href="/binary_translate">Translate char</Dropdown.Item>
+					<Dropdown.Item eventKey={1} href="/binary_conversion">Conversion number</Dropdown.Item>
+        			<Dropdown.Item eventkey={1} href="/binary_translate">Translate character</Dropdown.Item>
 				</Dropdown.Menu>
 			</Dropdown>
 		</Nav>

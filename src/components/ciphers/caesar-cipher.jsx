@@ -57,6 +57,5 @@ export function caesarDecipher(text, replacement) {
 
 			// otherwise
 			return char
-
 		}).join('')
 }

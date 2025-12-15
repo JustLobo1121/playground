@@ -11,6 +11,7 @@ function Rutas() {
             <Route>
                 <Route path="/" element={<Home />} />
                 <Route path="/caesar_cipher"element={<CaesarEncoder />} />
+                <Route path="/xor_logic"element={<XORLogic />} />
                 <Route path="/binary_translate"element={<BinaryTranslate />} />
                 <Route path="/binary_conversion"element={<BinaryConversion />} />
             </Route>            

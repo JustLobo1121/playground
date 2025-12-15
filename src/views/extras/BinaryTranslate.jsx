@@ -14,10 +14,10 @@ function BinaryTranslate() {
     }
 
     return (
-        <Container>
+        <Container fluid>
             <Row>
                 <Col>
-                    <h1>test Binary translate</h1>
+                    <h1>Binary translate char to binary</h1>
                     <Col>
                         <h2>input</h2>
                         <input type="text" onChange={handleInputToBinaryOnChange}/>
@@ -26,7 +26,7 @@ function BinaryTranslate() {
                     <textarea typeof="text" readOnly value={outputText} style={{ width: '500px', height: '150px' }}></textarea>
                 </Col>            
                 <Col>
-                    <h1>binary to char</h1>
+                    <h1>translate binary to char</h1>
                     <Col>
                         <h2>input</h2>
                         <input type="text" onChange={handleInputToCharOnChange}/>
