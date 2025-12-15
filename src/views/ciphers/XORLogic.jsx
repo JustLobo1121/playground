@@ -1,7 +1,6 @@
 import { Container,Form,Row,Col, Button } from "react-bootstrap"
 import { useState } from 'react'
-import { binaryToChar, charToBinary } from "../../components/extras/binary-translate"
-import { xor_encoder } from "../../components/ciphers/xor-gateLogic"
+import { binaryToChar, charToBinary, xor_encoder } from "../../components/utils"
 
 function XORLogic() {
     const [textInputC, setTextInputC] = useState("")

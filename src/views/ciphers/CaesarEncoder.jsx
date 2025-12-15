@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Container,Button,Col,Form,Row } from "react-bootstrap"
-import { caesarCipher,caesarDecipher } from '../../components/ciphers/caesar-cipher';
+import { caesarCipher,caesarDecipher } from '../../components/utils'
 
 function CaesarEncoder() {
     const [validateC, setValidateC] = useState(false)

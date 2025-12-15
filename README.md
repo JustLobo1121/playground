@@ -13,6 +13,6 @@
 
 ## pendiente
 
-1. [steganography](https://www.giac.org/paper/gsec/1461/steganography-real-risk/102743)
-2. hacer [cipher stacking/multiple encryption](https://en.wikipedia.org/wiki/Multiple_encryption)
+1. hacer [cipher stacking/multiple encryption](https://en.wikipedia.org/wiki/Multiple_encryption)
+2. [steganography](https://www.giac.org/paper/gsec/1461/steganography-real-risk/102743)
 3. posiblemente agregar mas ideas de criptografia u otro tipo de tema.

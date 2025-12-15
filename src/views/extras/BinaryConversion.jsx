@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { Container,Col,Row } from "react-bootstrap"
-import { numToBinary } from "../../components/extras/binary-translate"
+import { numToBinary } from "../../components/utils"
 
 function BinaryConversion() {
     const [Test128,setTest128] = useState(0)

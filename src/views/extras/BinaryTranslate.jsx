@@ -1,6 +1,6 @@
 import { Container,Col,Row } from "react-bootstrap"
 import { useState } from "react"
-import { charToBinary, binaryToChar } from "../../components/extras/binary-translate"
+import { charToBinary, binaryToChar } from "../../components/utils"
 
 function BinaryTranslate() {
     const [outputText, setOuputText] = useState("")
