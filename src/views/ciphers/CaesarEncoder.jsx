@@ -15,7 +15,7 @@ function CaesarEncoder() {
 	const [textInputD, setTextInputD] = useState("")
 	const [textOutputD, setTextOutputD] = useState("")
 
-	const options = Array.from({ length: 26 }, (v, i) => i + 1);
+	const options = Array.from({ length: 26 }, (v, i) => i + 1)
 
 	const Encoder = () => {
 		let output = caesarCipher(textInputC, selectNumC)

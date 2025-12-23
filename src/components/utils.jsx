@@ -23,12 +23,17 @@ export function caesarCipher(text, replacement) {
 			if (code >= 97 && code <= 122) {
 				return String.fromCharCode(((code - 97 + shift) % 26) + 97)
 			}
+			// numbers
+			if (code >= 48 && code <= 57) {
+				return String.fromCharCode(((code - 48 + shift) % 10) + 48)
+			}
 
 			// otherwise
 			return char
 
 		}).join('')
 }
+
 /**
  * function to get the original character from the replacement/shift
  * @param {String} text 
@@ -54,13 +59,18 @@ export function caesarDecipher(text, replacement) {
 			if (code >= 97 && code <= 122) {
 				return String.fromCharCode(((code - 97 - shift) % 26) + 97)
 			}
+			// numbers
+			if (code >= 48 && code <= 57) {
+				return String.fromCharCode(((code - 48 + shift) % 26) + 48)
+			}
 
 			// otherwise
 			return char
 		}).join('')
 }
+
 /**
- * module function to use the XOR table to encode
+ * function to use the XOR table to encode
  * @param {String} ti Binary Text Input
  * @param {String} tk Binary Text Input key
  * @returns Binary string encoded with XOR truth table 
@@ -74,6 +84,23 @@ export function xor_encoder(ti, tk) {
     }
     return code.join("")
 }
+
+/**
+ * Xor encoder with hexadecimal output
+ * @param {String} ti binary string input
+ * @param {String} tk binary string key
+ * @returns hexadecimal string
+ */
+export function hexaXor_encoder(ti, tk) {
+	const code = []
+	for (let i=0; i<ti.length;i++) {
+		let iKey = i % tk.length
+		if (ti[i] == tk[iKey]) code.push("0")
+		if (ti[i] != tk[iKey]) code.push("1")
+	}
+	return parseInt(code.join(""),2).toString(16).toUpperCase().padStart(2, '0')
+}
+
 /**
  * function to transform x number to binary equivalent
  * @param {Int} num 
@@ -84,6 +111,7 @@ export function numToBinary(num) {
     if(isNaN(number)) return ''
     return number.toString(2)
 }
+
 /**
  * function to transform binary to char equivalent
  * @param {*} char 
@@ -99,6 +127,7 @@ export function binaryToChar(char) {
     }
     return (chain.join(""))
 }
+
 /**
  * function to transform char to binary equivalent
  * @param {*} char 
@@ -111,4 +140,13 @@ export function charToBinary(char) {
             return String(c.charCodeAt(0).toString(2)).padStart(8,0)
         }).join('')
     return aux
+}
+
+/**
+ * function to detect if a string is a binary string
+ * @param {String} char any String
+ * @returns boolean if the string is binary or not
+ */
+export function detectBinary(char) {
+	return char.match(/^[01]+$/) !== null
 }

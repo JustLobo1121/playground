@@ -10,9 +10,9 @@
 2. Traduccion: caracter -> binario -> caracter
 3. Traduccion: numero -> binario -> numero
 4. [Cifrado vernam usando (logica XOR)](https://es.wikipedia.org/wiki/Cifrado_Vernam)
+5. [cipher stacking/multiple encryption](https://en.wikipedia.org/wiki/Multiple_encryption)(solo en encriptacion)
 
 ## pendiente
 
-1. hacer [cipher stacking/multiple encryption](https://en.wikipedia.org/wiki/Multiple_encryption)
-2. [steganography](https://www.giac.org/paper/gsec/1461/steganography-real-risk/102743)
-3. posiblemente agregar mas ideas de criptografia u otro tipo de tema.
+1. [steganography](https://www.giac.org/paper/gsec/1461/steganography-real-risk/102743)
+2. posiblemente agregar mas ideas de criptografia u otro tipo de tema.
