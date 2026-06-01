@@ -1,28 +1,51 @@
-import { Card } from "react-bootstrap"
+import { Card, Button, Form } from "react-bootstrap"
 
-export function CaesarCard({ config, change }) {
-	const options = Array.from({ length: 26 }, (v, i) => i + 1);
+function CaesarConfig({ config, change}) {
+    const options = Array.from({ length: 26 }, (v,i) => i+1)
     return (
-    <Card>
-        <Card.Body>
-            <Card.Title>Caesar encoder</Card.Title>
-            <select value={config.shift} onChange={(e) => change({ shift: parseInt(e.target.value)})}>
+        <>
+            <Form.Label>Nivel de Rotación:</Form.Label>
+            <Form.Select value={config.shift} onChange={(e) => change({ shift: parseInt(e.target.value)})}>
                 {options.map(option => (
 					<option key={option} value={option}>shift +{option}</option>
 				))}
-            </select>
-        </Card.Body>
-    </Card>
+            </Form.Select>
+        </>
+    )
+}
+function XorConfig({ config, change }) {
+    return (
+        <>
+            <Form.Label>Selected Key</Form.Label>
+            <Form.Control type="text" placeholder="any key" value={config.key} onChange={(e) => change({ key: e.target.value})} />
+        </>
     )
 }
 
-export function XorCard({ config, change }) {
+export function CipherLayerCard({ layer, onUpdateConfig, onChangeType, onDelete }) {
     return (
-    <Card>
+    <Card className="mb-3">
+        <Card.Header className="d-flex justify-content-between align-items-center">
+            <Form.Select 
+                value={layer.type} 
+                onChange={(e) => onChangeType(layer.id, e.target.value)}
+                style={{ width: 'auto', fontWeight: 'bold' }}
+            >
+                <option value="CAESAR">Caesar Encoder</option>
+                <option value="XOR">XOR Logic Gate</option>
+            </Form.Select>
+            <Button variant="danger" size="sm" onClick={() => onDelete(layer.id)}>
+                Eliminar
+            </Button>
+        </Card.Header>
+
         <Card.Body>
-            <Card.Title>XOR logic gate encoder</Card.Title>
-            <Card.Subtitle className="mb-2 text-muted">Selected Key</Card.Subtitle>
-            <input placeholder="any key" value={config.key} onChange={(e) => change({ keyword: e.target.value})}></input>
+            {layer.type === 'CAESAR' && (
+                <CaesarConfig config={layer.config} change={onUpdateConfig} />
+            )}
+            {layer.type === 'XOR' && (
+                <XorConfig config={layer.config} change={onUpdateConfig} />
+            )}
         </Card.Body>
     </Card>
     )

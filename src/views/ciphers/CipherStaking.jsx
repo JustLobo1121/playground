@@ -1,5 +1,5 @@
-import { CaesarCard,XorCard } from "../../components/Cards"
-import { detectBinary,caesarCipher,charToBinary,binaryToChar,hexaXor_encoder } from "../../components/utils"
+import { CipherLayerCard } from "../../components/Cards"
+import { detectBinary, caesarCipher, charToBinary, binaryToChar, hexaXor_encoder } from "../../components/utils"
 import { Button, Card, Col, Container, Row } from "react-bootstrap"
 import { useState } from "react"
 
@@ -10,25 +10,30 @@ function CipherStacking() {
         { id: 1, type: 'CAESAR', config: { shift: 3 } },
         { id: 2, type: 'XOR', config: { key: 'sol' } }
     ])
-    const numCipher = Array.from({ length: 26 }, (v, i) => i + 1)
 
-    const handleChangeLayers =(e) => {
-        const newNum = parseInt(e.target.value)
-        const actualNum = layers.length
-
-        if (newNum > actualNum) {
-            let layersleft = newNum - actualNum
-            const newLayers = Array.from({length: layersleft}, () => ({
-                id: Date.now(),
-                type: "CAESAR",
-                config: { shift: 3 }
-            }))
-            setLayers([...layers, ...newLayers])
+    const handleAddLayer = () => {
+        const newLayer = {
+            id: Date.now(),
+            type: "CAESAR",
+            config: { shift: 3 }
         }
-        if (actualNum > newNum) {
-            setLayers(layers.slice(0,newNum))
-        }
+        setLayers([...layers, newLayer])
     }
+
+    const handleDeleteLayer = (id) => {
+        setLayers(layers.filter(layer => layer.id !== id))
+    }
+
+    const handleChangeType = (id, newType) => {
+        setLayers(prevLayers => prevLayers.map(layer => {
+            if (layer.id === id) {
+                const defaultConfig = newType === "CAESAR" ? { shift: 3 } : { key: "" };
+                return { ...layer, type: newType, config: defaultConfig }
+            }
+            return layer
+        }))
+    }
+    
     const handleUpdateLayer = (id, newconfig) => {
         setLayers(prevLayers => {
             return prevLayers.map(layer => {
@@ -37,6 +42,7 @@ function CipherStacking() {
             })
         })
     }
+
     const handleStacking = () => {
         let text = inputText
         layers.map((layer) => {
@@ -62,30 +68,29 @@ function CipherStacking() {
     }
 
     return (
-    <Container fluid>
-        <h1>test cipher stacking</h1>
+    <Container fluid className="mt-4">
+        <h1>Test Cipher Stacking</h1>
         <Row>
-            <Col>
-                <label>Number of layers: 
-                    <select onChange={handleChangeLayers} value={layers.length}>
-					    <option key={0} value={0}>0</option>
-                        {numCipher.map(op => {
-                            return <option key={op} value={op}>{op}</option>
-                        })}
-                    </select>
-                </label>
+            <Col md={6}>
+                <div className="d-flex justify-content-between align-items-center mb-3">
+                    <h2>List of layers</h2>
+                    <Button variant="success" onClick={handleAddLayer}>+ Añadir Capa</Button>
+                </div>
+
                 <div>
-                    <h1>list of layers</h1>
-                    {layers.map((layer) => {
-                        if (layer.type === "CAESAR") {
-                            return <CaesarCard config={layer.config} change={(newConfig) => handleUpdateLayer(layer.id,newConfig)}/>
-                        } else if (layer.type === "XOR") {
-                            return <XorCard config={layer.config} change={(newConfig) => handleUpdateLayer(layer.id,newConfig)}/>
-                        }
-                    })}
+                    {layers.map((layer) => (
+                        <CipherLayerCard 
+                            key={layer.id}
+                            layer={layer}
+                            onChangeType={handleChangeType}
+                            onUpdateConfig={(newConfig) => handleUpdateLayer(layer.id, newConfig)}
+                            onDelete={handleDeleteLayer}
+                        />
+                    ))}
                 </div>
             </Col>
-            <Col>
+            
+            <Col md={6}>
                 <Card>
                     <Card.Body>
                         <Card.Title>Input</Card.Title>
