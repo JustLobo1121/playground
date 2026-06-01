@@ -1,5 +1,5 @@
 import { CipherLayerCard } from "../../components/Cards"
-import { detectBinary, caesarCipher, charToBinary, binaryToChar, hexaXor_encoder } from "../../components/utils"
+import { detectBinary, caesarCipher, charToBinary, binaryToChar, hexaXor_encoder, hexToBinary, caesarDecipher, xor_encoder } from "../../components/utils"
 import { Button, Card, Col, Container, Row } from "react-bootstrap"
 import { useState } from "react"
 
@@ -67,6 +67,29 @@ function CipherStacking() {
         setOutputText(text)
     }
 
+    const handleUnstacking = () => {
+        let text = inputText
+        const reverseLayers = [...layers].reverse()
+        reverseLayers.forEach((layer) => {
+            if (layer.type === "CAESAR") {
+                if (detectBinary(text)) {
+                    text = caesarDecipher(binaryToChar(text), layer.config.shift);
+                } else {
+                    text = caesarDecipher(text, layer.config.shift);
+                }
+            }
+        
+            if (layer.type === "XOR") {
+                let ti = hexToBinary(text); 
+                let tk = charToBinary(layer.config.key);
+                let resultBinary = xor_encoder(ti, tk);
+            
+                text = binaryToChar(resultBinary);
+            }
+        })
+        setOutputText(text)
+    }
+
     return (
     <Container fluid className="mt-4">
         <h1>Test Cipher Stacking</h1>
@@ -98,6 +121,7 @@ function CipherStacking() {
                     </Card.Body>
                     <Card.Footer>
                         <Button onClick={handleStacking}>Start Stacking</Button>
+                        <Button variant="warning" onClick={handleUnstacking}>Start Decipher</Button>
                     </Card.Footer>
                 </Card>
                 <br/>

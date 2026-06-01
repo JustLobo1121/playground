@@ -61,7 +61,7 @@ export function caesarDecipher(text, replacement) {
 			}
 			// numbers
 			if (code >= 48 && code <= 57) {
-				return String.fromCharCode(((code - 48 + shift) % 26) + 48)
+				return String.fromCharCode((((code - 48 - shift) % 10) + 10) % 10 + 48)	
 			}
 
 			// otherwise
@@ -92,13 +92,24 @@ export function xor_encoder(ti, tk) {
  * @returns hexadecimal string
  */
 export function hexaXor_encoder(ti, tk) {
-	const code = []
-	for (let i=0; i<ti.length;i++) {
-		let iKey = i % tk.length
-		if (ti[i] == tk[iKey]) code.push("0")
-		if (ti[i] != tk[iKey]) code.push("1")
-	}
-	return parseInt(code.join(""),2).toString(16).toUpperCase().padStart(2, '0')
+    const code = [];
+    for (let i=0; i<ti.length; i++) {
+        let iKey = i % tk.length;
+        if (ti[i] == tk[iKey]) code.push("0");
+        else code.push("1");
+    }
+    
+    let binStr = code.join("");
+    let hexStr = "";
+    
+    while (binStr.length % 4 !== 0) binStr = "0" + binStr;
+
+    for (let i = 0; i < binStr.length; i += 4) {
+        let chunk = binStr.substring(i, i + 4);
+        hexStr += parseInt(chunk, 2).toString(16).toUpperCase();
+    }
+    
+    return hexStr;
 }
 
 /**
@@ -149,4 +160,20 @@ export function charToBinary(char) {
  */
 export function detectBinary(char) {
 	return char.match(/^[01]+$/) !== null
+}
+
+/**
+ * Convierte un string Hexadecimal de vuelta a Binario
+ * @param {String} hexString 
+ * @returns {String} binary string
+ */
+export function hexToBinary(hexString) {
+    let binary = "";
+    for (let i = 0; i < hexString.length; i++) {
+        // Tomamos cada caracter hex (ej: 'A', '4')
+        let hexChar = hexString[i];
+        // Lo convertimos a decimal (base 16), luego a binario (base 2), y aseguramos 4 bits
+        binary += parseInt(hexChar, 16).toString(2).padStart(4, '0');
+    }
+    return binary;
 }
