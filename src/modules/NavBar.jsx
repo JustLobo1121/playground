@@ -18,6 +18,8 @@ function NavBar() {
         			<Dropdown.Item eventkey={1} href="/caesar_cipher">Caesar</Dropdown.Item>
         			<Dropdown.Item eventkey={1} href="/xor_logic">XOR logic</Dropdown.Item>
         			<Dropdown.Item eventkey={1} href="/cipher_stacking">Cipher Stacking</Dropdown.Item>
+        			<Dropdown.Item eventkey={1} href="/keypair_starter">key-pair starter</Dropdown.Item>
+        			<Dropdown.Item eventkey={1} href="/keypair_cipher">Key-pair Encryption</Dropdown.Item>
       			</Dropdown.Menu>
 			</Dropdown>
 			<Dropdown>

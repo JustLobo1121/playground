@@ -3,6 +3,8 @@ import Home from "../views/Home"
 import CaesarEncoder from "../views/ciphers/CaesarEncoder"
 import XORLogic from "../views/ciphers/XORLogic"
 import CipherStacking from "../views/ciphers/CipherStaking"
+import KeypairEncoder from "../views/ciphers/KeypairEncoder"
+import KeypairStarter from "../views/ciphers/KeypairStarter"
 import BinaryTranslate from "../views/extras/BinaryTranslate"
 import BinaryConversion from "../views/extras/BinaryConversion"
 
@@ -16,6 +18,8 @@ function Rutas() {
                 <Route path="/cipher_stacking"element={<CipherStacking />} />
                 <Route path="/binary_translate"element={<BinaryTranslate />} />
                 <Route path="/binary_conversion"element={<BinaryConversion />} />
+                <Route path="/keypair_starter" element={<KeypairStarter />} />
+                <Route path="/keypair_cipher" element={<KeypairEncoder />} />
             </Route>            
         </Routes>
     )

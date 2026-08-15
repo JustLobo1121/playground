@@ -170,10 +170,50 @@ export function detectBinary(char) {
 export function hexToBinary(hexString) {
     let binary = "";
     for (let i = 0; i < hexString.length; i++) {
-        // Tomamos cada caracter hex (ej: 'A', '4')
         let hexChar = hexString[i];
-        // Lo convertimos a decimal (base 16), luego a binario (base 2), y aseguramos 4 bits
         binary += parseInt(hexChar, 16).toString(2).padStart(4, '0');
     }
     return binary;
+}
+
+export function gcd(a, b) {
+	let x = 1; let y = 0;
+	let x1 = 0; let y1 = 1;
+	let a1 = a; let b1 = b;
+	while (b1) {
+		let q = Math.floor(a1 / b1);
+		([x, x1] = [x1, x - q * x1]);
+		([y. y1] = [y1, y - q * y1]);
+		([a1, b1] = [b1, a1 - q * b1]);
+	}
+	return { gcd: a1, x, y};
+}
+
+/**
+ * a^b * mod(c)
+ * @param {Int} a base
+ * @param {Int} b power of
+ * @param {Int} c module
+ * @returns 
+ */
+export function Exponenciación_Modular(a, b, c) {
+    let auxvar = 1;
+    for (let i = 0; i < b; i++) {
+        auxvar = (auxvar * a) % c;
+    }
+    return auxvar;
+}
+
+export function rsaEncrypt(inputText, e, n) {
+    return inputText.split('').map(char => {
+        let m = char.charCodeAt(0);
+        return Exponenciación_Modular(m, e, n);
+    });
+}
+
+export function rsaDecrypt(cipherArray, d, n) {
+    return cipherArray.map(c => {
+        let m = Exponenciación_Modular(c, d, n);
+        return String.fromCharCode(m);
+    }).join('');
 }

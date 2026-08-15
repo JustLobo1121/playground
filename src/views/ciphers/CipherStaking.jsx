@@ -92,7 +92,7 @@ function CipherStacking() {
 
     return (
     <Container fluid className="mt-4">
-        <h1>Test Cipher Stacking</h1>
+        <h1>Cipher Stacking</h1>
         <Row>
             <Col md={6}>
                 <div className="d-flex justify-content-between align-items-center mb-3">
