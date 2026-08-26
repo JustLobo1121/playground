@@ -3,25 +3,25 @@ import { rsaEncrypt, rsaDecrypt } from "../../components/utils";
 import { Form, Button, Card, Row, Col, Container } from "react-bootstrap";
 
 function KeypairStarter() {
-      const [inputText, setInputText] = useState("");
-      const [encryptedData, setEncryptedData] = useState([]);
-      const [decryptedText, setDecryptedText] = useState("");
+    const [inputText, setInputText] = useState("");
+    const [encryptedData, setEncryptedData] = useState([]);
+    const [decryptedText, setDecryptedText] = useState("");
 
-      const [keys, setKeys] = useState({ e: 5, d: 173, n: 323 });
+    const [keys, setKeys] = useState({ e: 5, d: 173, n: 323 });
+    
+    const handleEncrypt = () => {
+        if (!inputText) return;
+        const cipherArray = rsaEncrypt(inputText, keys.e, keys.n);
+        setEncryptedData(cipherArray);
+        setDecryptedText("");
+    };
 
-      const handleEncrypt = () => {
-            if (!inputText) return;
-            const cipherArray = rsaEncrypt(inputText, keys.e, keys.n);
-            setEncryptedData(cipherArray);
-            setDecryptedText("");
-      };
-
-      const handleDecrypt = () => {
-          if (encryptedData.length === 0) return;
-          const plainText = rsaDecrypt(encryptedData, keys.d, keys.n);
-          setDecryptedText(plainText);
-      };
-      return (
+    const handleDecrypt = () => {
+        if (encryptedData.length === 0) return;
+        const plainText = rsaDecrypt(encryptedData, keys.d, keys.n);
+        setDecryptedText(plainText);
+    };
+    return (
         <Container className="mt-4">
             <Card>
                 <Card.Header className="bg-dark text-white">
