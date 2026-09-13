@@ -5,15 +5,12 @@ import RoutesTs from "./routes/RoutesTs"
 const App: React.FC = () => {
   return (
       <BrowserRouter>
-         {/* header */}
-         <Navbar/>
-         {/* body */}
-         <div className="min-h-screen w-full flex flex-col items-center justify-center bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">        
-            <main>
+         <div className="flex flex-col min-h-screen w-full bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">        
+            <Navbar/>
+            <main className="flex-auto">
                <RoutesTs />
             </main>
          </div>
-         {/* footer */}
     </BrowserRouter>
   );
 };

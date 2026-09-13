@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom"
+import { ThemeToggle } from "./ThemeToggle";
 
 interface NavigationItem {
   name: string;
@@ -6,7 +7,6 @@ interface NavigationItem {
 }
 
 const navigation: NavigationItem[] = [
-    { name: 'toggle mode', href: '/toggle'},
     { name: 'Home', href: '/' },
     { name: 'Binary translate', href: '/binarytranslate' },
     { name: 'Services', href: '/services' },
@@ -20,20 +20,20 @@ function Navbar() {
 
   return (
     <header>
-        <nav className="shadow-lg sticky top-0 z-50 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center justify-between h-16">
-                {/* Desktop Menu */}
-                <div className="hidden md:flex space-x-4">
-                    {navigation.map((item) => (
-                        <NavLink key={item.name} to={item.href} className={linkStyles}>
-                            {item.name}
-                        </NavLink>
-                    ))}
+        <nav className="shadow-lg w-full top-0 z-50 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="flex items-center justify-between h-16">
+                    <div className="hidden md:flex space-x-4">
+                        <ThemeToggle />
+                        {navigation.map((item) => (
+                            <NavLink key={item.name} to={item.href} className={linkStyles}>
+                                {item.name}
+                            </NavLink>
+                        ))}
+                    </div>
                 </div>
             </div>
-        </div>
-    </nav>
+        </nav>
     </header>
   );
 };

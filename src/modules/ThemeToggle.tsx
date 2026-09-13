@@ -7,7 +7,7 @@ export function ThemeToggle() {
         <div className="flex gap-2 p-2 bg-gray-100 dark:bg-gray-800 rounded-lg max-w-xs transition-colors duration-300">
             {(["light", "dark", "system"] as const).map((mode) => (
                 <button key={mode} onClick={() => setTheme(mode)}
-                    className={`px-3 py-1.5 rounded-md text-sm font-medium capitalize transition-all
+                    className={`px-3 py-1.5 rounded-md text-sm font-small capitalize transition-all
                         ${
                             theme === mode
                             ? "bg-white dark:bg-gray-700 text-blue-600 dark:text-blue-400 shadow-sm"
