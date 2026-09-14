@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { charToBinary, binaryToChar } from '../components/utils'
+import { charToBinary, binaryToChar } from '../../components/utils'
 
 function BinaryTranslate() {
     const [outputText, setOutputText] = useState("")
