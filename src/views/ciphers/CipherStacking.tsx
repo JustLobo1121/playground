@@ -1,11 +1,11 @@
 import { CipherLayerCard } from "../../components/Cards";
-import { detectBinary, caesarCipher, charToBinary, binaryToChar, hexaXor_encoder, hexToBinary, caesarDecipher, xor_encoder,} from "../../components/utils";
+import { detectBinary, caesarCipher, charToBinary, binaryToChar, hexaXor_encoder, hexToBinary, caesarDecipher, xor_encoder, rsaEncrypt, rsaDecrypt,} from "../../components/utils";
 import { useState } from "react";
 
 type CipherLayer = {
     id: number;
-    type: "CAESAR" | "XOR";
-    config: { shift: number } | { key: string };
+    type: "CAESAR" | "XOR" | "KEYPAIR";
+    config: { shift: number } | { key: string } | { e: number, d: number, n: number };
 };
 
 function CipherStacking() {
@@ -14,6 +14,7 @@ function CipherStacking() {
     const [layers, setLayers] = useState<CipherLayer[]>([
         { id: 1, type: "CAESAR", config: { shift: 3 } },
         { id: 2, type: "XOR", config: { key: "sol" } },
+        { id: 3, type: "KEYPAIR", config: { e: 5, d: 173, n: 323 } },
     ]);
 
     const handleAddLayer = () => {
@@ -71,6 +72,10 @@ function CipherStacking() {
                 const tk = charToBinary(layer.config.key)
                 text = hexaXor_encoder(ti, tk)
             }
+            if (layer.type === "KEYPAIR" && "e" in layer.config && "d" in layer.config && "n" in layer.config) {
+                const cipherArray = rsaEncrypt(inputText, layer.config.e, layer.config.n);
+                text = cipherArray.join(", ")
+            }
         })
         setOutputText(text)
     }
@@ -93,6 +98,15 @@ function CipherStacking() {
                 let resultBinary = xor_encoder(ti, tk);
             
                 text = binaryToChar(resultBinary);
+            }
+            
+            if (layer.type === "KEYPAIR" && "e" in layer.config && "d" in layer.config && "n" in layer.config) {
+                const numbers = text
+                    .split(',')
+                    .map((value) => value.trim())
+                    .filter((value) => value !== '' && !isNaN(Number(value)))
+                    .map(Number);
+                text = rsaDecrypt(numbers, layer.config.d, layer.config.n)
             }
         })
         setOutputText(text)

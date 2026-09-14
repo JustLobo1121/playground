@@ -16,4 +16,5 @@
 - [Data Encryption Standar](https://en.wikipedia.org/wiki/Data_Encryption_Standard)
 - [steganography](https://www.giac.org/paper/gsec/1461/steganography-real-risk/102743)
 - [Enigma](https://es.wikipedia.org/wiki/Enigma_(m%C3%A1quina))
+- (posible idea visualizacion de fractales?)
 - posiblemente agregar mas ideas de criptografia u otro tipo de tema.

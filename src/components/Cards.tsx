@@ -8,9 +8,14 @@ interface xorConfigProp {
     change: (config: { key: string }) => void;
 }
 
+interface keypairConfigProp {
+    config: { e: number, d: number, n: number };
+    change: (config : { e: number, d: number, n: number }) => void;
+}
+
 interface Layer {
     id: string | number;
-    type: 'XOR' | 'CAESAR' | string;
+    type: 'XOR' | 'CAESAR' | 'KEYPAIR' | string;
     config: any;
 }
 
@@ -58,6 +63,16 @@ function XorConfig({ config, change }: xorConfigProp) {
         </div>
     );
 }
+function KeypairConfig({ config, change }: keypairConfigProp) {
+    return (
+        <div className="flex flex-col gap-2">
+            <label className="text-sm font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+                public key: <strong className="text-gray-700 dark:text-gray-300">({config.e}, {config.n})</strong> 
+                private key: <strong className="text-gray-700 dark:text-gray-300">({config.d}, {config.n})</strong> 
+            </label>
+        </div>
+    )
+}
 
 export function CipherLayerCard({ layer, onUpdateConfig, onChangeType, onDelete }: cipherLayerCardProp) {
     return (
@@ -70,6 +85,7 @@ export function CipherLayerCard({ layer, onUpdateConfig, onChangeType, onDelete 
                 >
                     <option value="CAESAR" className="font-normal text-gray-900">Caesar Encoder</option>
                     <option value="XOR" className="font-normal text-gray-900">XOR Logic Gate</option>
+                    <option value="KEYPAIR" className="font-normal text-gray-900">Key pair Encoder(fixed keys)</option>
                 </select>
                 <button 
                     onClick={() => onDelete(layer.id)}
@@ -84,6 +100,9 @@ export function CipherLayerCard({ layer, onUpdateConfig, onChangeType, onDelete 
                 )}
                 {layer.type === 'XOR' && (
                     <XorConfig config={layer.config} change={onUpdateConfig} />
+                )}
+                {layer.type === "KEYPAIR" && (
+                    <KeypairConfig config={layer.config} change={onUpdateConfig} />
                 )}
             </div>
             
