@@ -47,11 +47,11 @@ function KeypairStarter() {
                         <div className="flex-1 flex flex-col gap-4">
                             <div className="flex flex-col gap-2">
                                 <label className="text-sm font-bold tracking-wider uppercase text-gray-500 dark:text-gray-400">
-                                    Mensaje Original (M)
+                                    Original message
                                 </label>
                                 <input
                                     type="text"
-                                    placeholder="Ingresa texto ASCII..."
+                                    placeholder="original message input"
                                     value={inputText}
                                     onChange={(e) => setInputText(e.target.value)}
                                     className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
@@ -61,19 +61,19 @@ function KeypairStarter() {
                                 onClick={handleEncrypt}
                                 className="mt-2 w-full md:w-max px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors shadow-md"
                             >
-                                Cifrar con Clave Pública
+                                cipher with the public key
                             </button>
                         </div>
                         <div className="flex-1 flex flex-col gap-4">
                             <div className="flex flex-col gap-2">
                                 <label className="text-sm font-bold tracking-wider uppercase text-gray-500 dark:text-gray-400">
-                                    Criptograma (C)
+                                    Encrypted message
                                 </label>
                                 <textarea
                                     rows={2}
                                     value={cipherText} 
                                     onChange={handleCipherChange}
-                                    placeholder="Array de enteros cifrados"
+                                    placeholder="Array of integer encrypted"
                                     className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-600 dark:text-gray-300 resize-none  focus:outline-none focus:ring-amber-500 font-mono"
                                 />
                             </div>
@@ -82,19 +82,19 @@ function KeypairStarter() {
                                 disabled={encryptedData.length === 0}
                                 className="mt-2 w-full md:w-max px-6 py-2 bg-amber-500 hover:bg-amber-600 disabled:bg-gray-400 disabled:dark:bg-gray-600 disabled:cursor-not-allowed text-white rounded-lg font-medium transition-colors shadow-md"
                             >
-                                Descifrar con Clave Privada
+                                decipher with the private key
                             </button>
                         </div>
                     </div>
                     {decryptedText && (
                         <div className="w-full p-4 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 text-green-800 dark:text-green-400 flex items-center shadow-sm">
-                            <span><strong className="mr-2">Resultado:</strong> {decryptedText}</span>
+                            <span><strong className="mr-2">Result:</strong> {decryptedText}</span>
                         </div>
                     )}
                 </div>
                 <div className="px-6 py-4 bg-gray-50 dark:bg-gray-800/80 border-t border-gray-200 dark:border-gray-700 text-center text-gray-500 dark:text-gray-400 text-sm">
-                    Llave Pública: <strong className="text-gray-700 dark:text-gray-300">({keys.e}, {keys.n})</strong> | 
-                    Llave Privada: <strong className="text-gray-700 dark:text-gray-300">({keys.d}, {keys.n})</strong>
+                    Public key: <strong className="text-gray-700 dark:text-gray-300">({keys.e}, {keys.n})</strong> | 
+                    Private key: <strong className="text-gray-700 dark:text-gray-300">({keys.d}, {keys.n})</strong>
                 </div>
             </div>
         </div>

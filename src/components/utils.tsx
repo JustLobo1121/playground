@@ -176,12 +176,48 @@ export function hexToBinary(hexString: String) {
     return binary;
 }
 
-/**
- * 
- * @param a base
- * @param b power of 
- * @param c module
- * @returns 
+/** comment generate with copilot
+ * Calculates the greatest common divisor of two integers using the extended Euclidean algorithm.
+ * @param a public exponent.
+ * @param b internal clock.
+ * @returns x: seed of the private exponent.
+ */
+export function gcd(a: number, b: number): {gcd: number, x: number, y: number} {
+    let x = 1; let y = 0;
+    let x1 = 0; let y1 = 1;
+    let a1 = a; let b1 = b;
+
+    while (b1) {
+        let q = Math.floor(a1/b1);
+        ([x, x1] = [x1, x - q * x1]);
+        ([y, y1] = [y1, y - q * y1]);
+        ([a1, b1] = [b1, a1 - q * b1]);
+    }
+    return { gcd: a1, x, y }
+}
+
+
+/** comment generate with copilot
+ * Calculates the greatest common divisor of two integers.
+ * @param a First integer.
+ * @param b Second integer.
+ * @returns The greatest common divisor.
+ */
+export function mdc(a: number, b: number): number {
+    while (b !== 0) {
+        const temp = b
+        b = b % a;
+        a = temp
+    }
+    return Math.abs(a);
+}
+
+/** comment generate with copilot
+ * Calculates a modular exponentiation.
+ * @param a Base number.
+ * @param b Exponent.
+ * @param c Modulus.
+ * @returns The remainder of a raised to b, modulo c.
  */
 export function exponenciacion_modular(a: number, b: number, c: number) {
     let aux = 1;
@@ -191,6 +227,13 @@ export function exponenciacion_modular(a: number, b: number, c: number) {
     return aux;
 }
 
+/** comment generate with copilot
+ * Encrypts each character using RSA modular exponentiation.
+ * @param inputText Text to encrypt.
+ * @param e Public exponent.
+ * @param n RSA modulus.
+ * @returns An array of encrypted character values.
+ */
 export function rsaEncrypt(inputText: String, e: number, n: number) {
     return inputText.split('').map((char:String) => {
         let m = char.charCodeAt(0);
@@ -198,6 +241,13 @@ export function rsaEncrypt(inputText: String, e: number, n: number) {
     });
 }
 
+/** comment generate with copilot
+ * Decrypts RSA character values.
+ * @param cipherArray Encrypted character values.
+ * @param d Private exponent.
+ * @param n RSA modulus.
+ * @returns The decrypted text.
+ */
 export function rsaDecrypt(cipherArray: number[], d: number, n: number) {
     return cipherArray.map(c => {
         let m = exponenciacion_modular(c, d, n);

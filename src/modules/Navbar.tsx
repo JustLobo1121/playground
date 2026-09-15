@@ -17,7 +17,7 @@ const navigation: NavigationItem[] = [
         { name: "Caesar Encoder", href: "/caesarencoder"},
         { name: "XOR logic gate", href: "/xorlogic"},
         { name: "Key pair(normal)", href: "/keypair"},
-        { name: "Key pair(fixed public/private key)", href: "/keypair1"},
+        { name: "Key pair(fixed public/private key)", href: "/keypairfixed"},
     ]},
     { name: "Cipher Stacking", href: "/cipherstacking"},
 ];

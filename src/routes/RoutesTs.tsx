@@ -17,7 +17,7 @@ function RoutesTs() {
             <Route path="/binaryconversion" element={<BinaryConversion />} />
             <Route path="/caesarencoder" element={<CaesarEncoder />} />
             <Route path="/xorlogic" element={<XorLogic />} />
-            <Route path="/keypair1" element={<KeypairStarter />} />
+            <Route path="/keypairfixed" element={<KeypairStarter />} />
             <Route path="/keypair" element={<KeypairEncoder />} />
             <Route path="/cipherstacking" element={<CipherStacking />} />
         </Routes>
