@@ -4,7 +4,7 @@ import { useState } from "react";
 
 type CipherLayer = {
     id: number;
-    type: "CAESAR" | "XOR" | "KEYPAIR";
+    type: "CAESAR" | "XOR" | "KEYPAIR" | "KEYPAIRFIXED";
     config: { shift: number } | { key: string } | { e: number, d: number, n: number };
 };
 
@@ -15,6 +15,7 @@ function CipherStacking() {
         { id: 1, type: "CAESAR", config: { shift: 3 } },
         { id: 2, type: "XOR", config: { key: "sol" } },
         { id: 3, type: "KEYPAIR", config: { e: 5, d: 173, n: 323 } },
+        { id: 4, type: "KEYPAIRFIXED", config: { e: 5, d: 173, n: 323 } },
     ]);
 
     const handleAddLayer = () => {
@@ -33,10 +34,18 @@ function CipherStacking() {
     const handleChangeType = (id: number | string, newType: string) => {
         setLayers(prevLayers => prevLayers.map(layer => {
             if (String(layer.id) === String(id)) {
-                const type: CipherLayer["type"] = newType === "CAESAR" ? "CAESAR" : "XOR";
+                const type: CipherLayer["type"] = newType === "CAESAR"
+                    ? "CAESAR"
+                    : newType === "KEYPAIR"
+                        ? "KEYPAIR"
+                        : newType === "KEYPAIRFIXED"
+                            ? "KEYPAIRFIXED"
+                            : "XOR";
                 const config: CipherLayer["config"] = type === "CAESAR"
                     ? { shift: 3 }
-                    : { key: "" };
+                    : type === "KEYPAIR" || type === "KEYPAIRFIXED"
+                        ? { e: 5, d: 173, n: 323 }
+                        : { key: "" };
                 return { ...layer, type, config };
             }
             return layer
@@ -72,8 +81,8 @@ function CipherStacking() {
                 const tk = charToBinary(layer.config.key)
                 text = hexaXor_encoder(ti, tk)
             }
-            if (layer.type === "KEYPAIR" && "e" in layer.config && "d" in layer.config && "n" in layer.config) {
-                const cipherArray = rsaEncrypt(inputText, layer.config.e, layer.config.n);
+            if ((layer.type === "KEYPAIR" || layer.type === "KEYPAIRFIXED") && "e" in layer.config && "d" in layer.config && "n" in layer.config) {
+                const cipherArray = rsaEncrypt(text, layer.config.e, layer.config.n);
                 text = cipherArray.join(", ")
             }
         })
@@ -100,13 +109,12 @@ function CipherStacking() {
                 text = binaryToChar(resultBinary);
             }
             
-            if (layer.type === "KEYPAIR" && "e" in layer.config && "d" in layer.config && "n" in layer.config) {
-                const numbers = text
-                    .split(',')
-                    .map((value) => value.trim())
-                    .filter((value) => value !== '' && !isNaN(Number(value)))
-                    .map(Number);
-                text = rsaDecrypt(numbers, layer.config.d, layer.config.n)
+            if ((layer.type === "KEYPAIR" || layer.type === "KEYPAIRFIXED") && "e" in layer.config && "d" in layer.config && "n" in layer.config) {
+                const values = text.split(',').map((value) => value.trim());
+                const numbers = values.map(Number);
+                if (values.length > 0 && values.every((value, index) => value !== '' && Number.isInteger(numbers[index]))) {
+                    text = rsaDecrypt(numbers, layer.config.d, layer.config.n);
+                }
             }
         })
         setOutputText(text)

@@ -16,8 +16,11 @@ const navigation: NavigationItem[] = [
     { name: "ciphers", subItems: [
         { name: "Caesar Encoder", href: "/caesarencoder"},
         { name: "XOR logic gate", href: "/xorlogic"},
-        { name: "Key pair(normal)", href: "/keypair"},
+        { name: "Key pair", href: "/keypair"},
+    ]},
+    { name: "Starters", subItems: [
         { name: "Key pair(fixed public/private key)", href: "/keypairfixed"},
+        { name: "Advance Encryption Standar(fixed state)", href: "/aesfixed" },
     ]},
     { name: "Cipher Stacking", href: "/cipherstacking"},
 ];
