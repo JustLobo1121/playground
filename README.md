@@ -8,11 +8,13 @@
 2. Traduccion: caracter -> binario -> caracter
 3. Traduccion: numero -> binario -> numero
 4. [Cifrado vernam usando (logica XOR)](https://es.wikipedia.org/wiki/Cifrado_Vernam)
-5. [cipher stacking/multiple encryption](https://en.wikipedia.org/wiki/Multiple_encryption)
-6. [Keypair Encryption](https://en.wikipedia.org/wiki/Public-key_cryptography)(fixed keys)
+6. [Keypair Encryption](https://en.wikipedia.org/wiki/Public-key_cryptography)(with fidex keys and able to select keys)
+
+## empezando/continuando
+- [cipher stacking/multiple encryption](https://en.wikipedia.org/wiki/Multiple_encryption)(fix keypair encryption)
+- [Advance Encryption Standar](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard)
 
 ## pendiente/posible
-- [Advance Encryption Standar](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard)
 - [Data Encryption Standar](https://en.wikipedia.org/wiki/Data_Encryption_Standard)
 - [steganography](https://www.giac.org/paper/gsec/1461/steganography-real-risk/102743)
 - [Enigma](https://es.wikipedia.org/wiki/Enigma_(m%C3%A1quina))
